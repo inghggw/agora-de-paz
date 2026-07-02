@@ -4,6 +4,10 @@
 >
 > Proyecto de investigación aplicada en gobernanza digital, democracia participativa y transparencia algorítmica. 100% código abierto, donado a la humanidad para que cualquier comunidad del mundo pueda adoptarlo.
 
+![Proceso de Ágora de Paz: de la conversación ciudadana a un gobierno que rinde cuentas](./docs/img/proceso-agora-de-paz.png)
+
+*El proceso en 8 pasos: cualquier persona conversa, la IA resume los acuerdos, el filtro de bien común los evalúa, la ciudadanía vota, todo queda registrado públicamente, y de ahí emergen candidaturas alineadas con mandato temporal. El ciclo se repite porque las opiniones evolucionan.*
+
 ---
 
 ## 1. Problema
