@@ -250,6 +250,8 @@ data/                             # Datos anonimizados de consensos (públicos)
 results/                          # Resultados por ciclo de votación
 ```
 
+> Este README es la visión general del proyecto. Para el detalle de cada tema, ver los documentos en [`docs/`](./docs/): [01 — Problema y Visión](./docs/01-problema-y-vision.md), [02 — Metodología](./docs/02-metodologia.md), [03 — Criterios de Bien Común](./docs/03-criterios-bien-comun.md), [04 — Arquitectura](./docs/04-arquitectura.md), [05 — Gobernanza del Proyecto](./docs/05-gobernanza-del-proyecto.md).
+
 ---
 
 ## 7. Hoja de Ruta
@@ -257,8 +259,8 @@ results/                          # Resultados por ciclo de votación
 | Etapa | Descripción | Estado |
 |---|---|---|
 | 0 | Definición del motor de consenso y arquitectura | ✅ Completado (este documento) |
-| 1 | Estructura del repositorio + documentación de investigación | 🔄 En curso |
-| 2 | MVP del chat conversacional + Ollama local | ⬜ Pendiente |
+| 1 | Estructura del repositorio + documentación de investigación | ✅ Completado ([docs/](./docs/)) |
+| 2 | MVP del chat conversacional + Ollama local | 🔄 En curso ([backend/](./backend/), [frontend/](./frontend/)) |
 | 3 | Motor de síntesis + filtro de bien común | ⬜ Pendiente |
 | 4 | Ciclos de votación + registro histórico | ⬜ Pendiente |
 | 5 | Piloto cerrado con primeros ciudadanos en Ibagué | ⬜ Pendiente |
