@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException
 from uuid import UUID
 
-from app.api.dependencies import get_chat_repository
+from app.api.dependencies import get_chat_repository, get_conversational_assistant
 from app.api.v1.schemas import (
     ConversationResponse,
     MessageResponse,
@@ -23,9 +23,12 @@ def start_conversation(payload: StartConversationRequest, chat_repository=Depend
 
 @router.post("/conversations/{conversation_id}/messages", response_model=ConversationResponse)
 def send_message(
-    conversation_id: UUID, payload: SendMessageRequest, chat_repository=Depends(get_chat_repository)
+    conversation_id: UUID,
+    payload: SendMessageRequest,
+    chat_repository=Depends(get_chat_repository),
+    assistant=Depends(get_conversational_assistant),
 ):
-    use_case = SendMessage(chat_repository)
+    use_case = SendMessage(chat_repository, assistant)
     try:
         use_case.execute(conversation_id=conversation_id, content=payload.content)
     except NotFoundError as exc:

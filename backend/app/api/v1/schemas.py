@@ -36,3 +36,9 @@ class ConsensusResponse(BaseModel):
     topic: str
     summary: str
     status: str
+
+
+class SynthesizeConsensusRequest(BaseModel):
+    cycle_id: UUID
+    topic: str
+    texts: list[str]

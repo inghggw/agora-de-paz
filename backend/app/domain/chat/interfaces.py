@@ -14,3 +14,11 @@ class ChatRepository(ABC):
 
     @abstractmethod
     def list_since(self, since: datetime) -> list[Conversation]: ...
+
+
+class ConversationalAssistant(ABC):
+    """Puerto hacia el motor conversacional (LLM local vía Ollama, ver
+    docs/02-metodologia.md#1-conversación-abierta)."""
+
+    @abstractmethod
+    def reply(self, conversation: Conversation) -> str: ...

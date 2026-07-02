@@ -260,9 +260,9 @@ results/                          # Resultados por ciclo de votación
 |---|---|---|
 | 0 | Definición del motor de consenso y arquitectura | ✅ Completado (este documento) |
 | 1 | Estructura del repositorio + documentación de investigación | ✅ Completado ([docs/](./docs/)) |
-| 2 | MVP del chat conversacional + Ollama local | 🔄 En curso ([backend/](./backend/), [frontend/](./frontend/)) |
-| 3 | Motor de síntesis + filtro de bien común | ⬜ Pendiente |
-| 4 | Ciclos de votación + registro histórico | ⬜ Pendiente |
+| 2 | MVP del chat conversacional + Ollama local | ✅ Completado ([backend/](./backend/), [frontend/](./frontend/)) |
+| 3 | Motor de síntesis + filtro de bien común | ✅ Completado ([docs/03](./docs/03-criterios-bien-comun.md), `backend/app/infrastructure/ai/`) |
+| 4 | Ciclos de votación + registro histórico | 🔄 En curso |
 | 5 | Piloto cerrado con primeros ciudadanos en Ibagué | ⬜ Pendiente |
 | 6 | Piloto abierto + módulo de candidaturas | ⬜ Pendiente |
 

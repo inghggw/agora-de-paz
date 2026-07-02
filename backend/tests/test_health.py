@@ -1,6 +1,16 @@
 from fastapi.testclient import TestClient
 
+from app.api.dependencies import get_conversational_assistant
+from app.domain.chat.interfaces import ConversationalAssistant
 from app.main import app
+
+
+class FakeAssistant(ConversationalAssistant):
+    def reply(self, conversation):
+        return "¿Podrías contarme un poco más sobre eso?"
+
+
+app.dependency_overrides[get_conversational_assistant] = lambda: FakeAssistant()
 
 client = TestClient(app)
 
@@ -24,4 +34,7 @@ def test_start_conversation_and_send_message():
         json={"content": "Falta inversión en educación rural."},
     )
     assert response.status_code == 200
-    assert len(response.json()["messages"]) == 2
+    messages = response.json()["messages"]
+    assert len(messages) == 3
+    assert messages[-1]["author"] == "assistant"
+    assert messages[-1]["content"] == "¿Podrías contarme un poco más sobre eso?"

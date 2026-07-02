@@ -2,10 +2,8 @@ from uuid import UUID
 
 from app.core.exceptions import NotFoundError
 from app.domain.chat.value_objects import ParticipantMode
-from app.domain.consensus.entities import Consensus, Vote
-from app.domain.consensus.interfaces import ConsensusRepository
-from app.infrastructure.ai.common_good_filter import CommonGoodFilter
-from app.infrastructure.ai.synthesis_engine import SynthesisEngine
+from app.domain.consensus.entities import Consensus, ConsensusStatus, Vote
+from app.domain.consensus.interfaces import CommonGoodFilter, ConsensusRepository, SynthesisEngine
 
 
 class SynthesizeConsensus:
@@ -26,8 +24,6 @@ class SynthesizeConsensus:
         summary = self._synthesis_engine.synthesize(topic=topic, texts=raw_texts)
         consensus = Consensus(cycle_id=cycle_id, topic=topic, summary=summary)
         if not self._common_good_filter.is_aligned(consensus.summary):
-            from app.domain.consensus.entities import ConsensusStatus
-
             consensus.status = ConsensusStatus.NOT_ALIGNED
         self._consensus_repository.save(consensus)
         return consensus

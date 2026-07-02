@@ -80,7 +80,11 @@ frontend/                        # Repositorio o carpeta separada (Vue)
 
 ## Estado actual
 
-El scaffold de esta estructura ya vive en `backend/` y `frontend/` en la raíz del repositorio (Etapa 2 de la hoja de ruta). Los casos de uso, el motor de síntesis y el filtro de bien común son implementaciones mínimas o stubs: la lógica real de negocio se completa en las Etapas 2 a 4.
+Esta estructura vive en `backend/` y `frontend/` en la raíz del repositorio.
+
+- **Repositorios** (`infrastructure/database/`): implementación dual, seleccionable vía `Settings.repository_backend` (`memory` | `postgres`). `memory` permite correr la API y los tests sin infraestructura; `postgres` usa SQLAlchemy sobre PostgreSQL con creación automática de tablas al arrancar (ver `backend/README.md`).
+- **IA** (`infrastructure/ai/`): `OllamaConversationalAssistant`, `OllamaSynthesisEngine` y `OllamaCommonGoodFilter` llaman a un servidor Ollama local real. Sin Ollama corriendo, esos endpoints fallan explícitamente (no hay fallback silencioso) — ver `backend/README.md#ollama`.
+- Pendiente para etapas siguientes: cortes temporales automáticos por ciclo (Etapa 4), y la interfaz de votación/candidaturas en el frontend (Etapas 4 a 6).
 
 ---
 

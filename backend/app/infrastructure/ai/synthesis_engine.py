@@ -1,22 +1,30 @@
 """Motor de síntesis: agrupa conversaciones de un ciclo y propone consensos.
 
-Implementación real (LLM local vía Ollama) pendiente para la Etapa 3 de la
-hoja de ruta (ver docs/02-metodologia.md#3-síntesis-por-ia). Esta clase base
-define el contrato y un comportamiento mínimo determinista para poder probar
-el resto del flujo end-to-end sin un modelo cargado.
+Ver docs/02-metodologia.md#3-síntesis-por-ia. Usa el LLM local vía Ollama
+para producir una síntesis en una sola oración, en el mismo estilo que el
+ejemplo ilustrativo de la metodología.
 """
 
-from typing import Protocol
+from app.domain.consensus.interfaces import SynthesisEngine
+from app.infrastructure.ai.ollama_client import OllamaClient
+
+SYNTHESIS_PROMPT = (
+    "Eres el motor de síntesis de Ágora de Paz. A continuación hay "
+    "intervenciones de ciudadanos de Ibagué sobre el tema '{topic}'. "
+    "Redacta, en una sola oración y en español, el consenso emergente que "
+    "resume la posición mayoritaria. Empieza la oración con 'Consenso "
+    "emergente:'.\n\nIntervenciones:\n{texts}\n\nConsenso emergente:"
+)
 
 
-class SynthesisEngine(Protocol):
-    def synthesize(self, topic: str, texts: list[str]) -> str: ...
-
-
-class NaiveSynthesisEngine:
-    """Concatena y resume de forma trivial. Placeholder hasta integrar Ollama."""
+class OllamaSynthesisEngine(SynthesisEngine):
+    def __init__(self, client: OllamaClient) -> None:
+        self._client = client
 
     def synthesize(self, topic: str, texts: list[str]) -> str:
         if not texts:
             return f"Sin intervenciones registradas sobre '{topic}' en este ciclo."
-        return f"Consenso emergente sobre '{topic}' a partir de {len(texts)} intervenciones ciudadanas."
+        joined = "\n".join(f"- {text}" for text in texts)
+        prompt = SYNTHESIS_PROMPT.format(topic=topic, texts=joined)
+        response = self._client.generate(prompt).strip()
+        return response if response.startswith("Consenso emergente:") else f"Consenso emergente: {response}"
